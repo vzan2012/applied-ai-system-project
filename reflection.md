@@ -5,12 +5,83 @@
 **a. Initial design**
 
 - Briefly describe your initial UML design.
+  My initial design was to create five classes **Owner, Pet, Task, Scheduler and DailyPlan**. _Owner_ can have multiple pets. _Pet_ will have list of tasks, and _Scheduler_ organizes these components to generate daily schedule.
 - What classes did you include, and what responsibilities did you assign to each?
+  **Owner**: This class is the pet owner. Contains the owner name, pet collection, defining constraints like hours availability and preferences.
+  **Pet**: This class will have attributes of pet name, species, list of tasks assigned to the pet and methods like getTasksByPriority().
+  **Task**: This class with have the attributes of task name, task duration and task priority - _LOW, MEDIUM and High_.
+  **Scheduler**: This will be responsible for organizing the schedule based on the constraints - _Owner, Pet, and Task_.  
+  **DailyPlan**: This will have list of tasks - with assigned time slot and task description.
+
+  **UML Diagram:**
+
+  ```mermaid
+  classDiagram
+    class Owner {
+      - ownerName: str
+      - availableHoursPerDay: float
+      - preferences: str
+      - pets: List~Pet~
+      + addPet(pet: Pet) void
+      + removePet(petName: str) void
+      + getPets() List~Pet~
+    }
+
+    class Pet {
+      - petName: str
+      - species: str
+      - tasks: List~Task~
+      + addTask(task: Task) void
+      + removeTask(taskName: str) void
+      + getTasksByPriority(priority: str) List~Task~
+      + getAllTasks() List~Task~
+    }
+
+    class Task {
+      - taskName: str
+      - durationMinutes: int
+      - priority: str
+      + getPriority() str
+      + getDuration() int
+    }
+
+    class Scheduler {
+      + generateDailyPlan(owner: Owner, pet: Pet, availableTime: float) DailyPlan
+      - sortTasksByPriority(tasks: List~Task~) List~Task~
+      - checkTimeConstraints(tasks: List~Task~, availableTime: float) bool
+    }
+
+    class DailyPlan {
+      - scheduledTasks: List~ScheduledTask~
+      - totalTimeUsed: float
+      - description: str
+      + getSchedule() List~ScheduledTask~
+    }
+
+    class ScheduledTask {
+        - task: Task
+        - timeSlot: str
+        - reasoning: str
+        + getTask() Task
+        + getTimeSlot() str
+        + getReasoning() str
+    }
+
+    Owner "1" --> "*" Pet : owns
+    Pet "1" --> "*" Task : has
+    Scheduler --> DailyPlan : creates
+    DailyPlan "*" --> "1..*" ScheduledTask : contains
+    ScheduledTask --> Task : references
+  ```
 
 **b. Design changes**
 
 - Did your design change during implementation?
+  Yes, a change was made during the implementation in the **DailyPlan** class.
 - If yes, describe at least one change and why you made it.
+  Removed the `getExplanation()` method and replaced it with a `description` attribute.
+
+  **Why**: During the design review, I realized that the explanation/description is generated once by the Scheduler when it creates the DailyPlan, and then remains static. Storing it as an attribute is simpler and more efficient than using a method.
 
 ---
 
