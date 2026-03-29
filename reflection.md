@@ -74,6 +74,115 @@
     ScheduledTask --> Task : references
   ```
 
+**Updated UML Diagram (Final Implementation):**
+
+  ```mermaid
+  classDiagram
+    class Priority {
+      <<enumeration>>
+      LOW
+      MEDIUM
+      HIGH
+    }
+
+    class Species {
+      <<enumeration>>
+      DOG
+      CAT
+      OTHER
+    }
+
+    class TaskStatus {
+      <<enumeration>>
+      PENDING
+      COMPLETED
+      SKIPPED
+    }
+
+    class Frequency {
+      <<enumeration>>
+      ONCE
+      DAILY
+      WEEKLY
+    }
+
+    class Task {
+      + task_name: str
+      + duration_minutes: int
+      + priority: Priority
+      + status: TaskStatus
+      + frequency: Frequency
+      + due_date: date
+      + get_priority() Priority
+      + get_duration() int
+      + mark_completed() Task
+      + mark_skipped() void
+      + reset() void
+    }
+
+    class Pet {
+      + pet_name: str
+      + species: Species
+      + tasks: List~Task~
+      + add_task(task: Task) void
+      + remove_task(task_name: str) void
+      + get_tasks_by_priority(priority: Priority) List~Task~
+      + get_all_tasks() List~Task~
+      + get_pending_tasks() List~Task~
+    }
+
+    class Owner {
+      + owner_name: str
+      + available_hours_per_day: float
+      + preferences: str
+      + pets: List~Pet~
+      + add_pet(pet: Pet) void
+      + remove_pet(pet_name: str) void
+      + get_pets() List~Pet~
+      + get_all_tasks_from_all_pets() List~Task~
+      + get_pending_tasks_from_all_pets() List~Task~
+      + get_tasks_by_status(status: TaskStatus) List~Task~
+      + get_tasks_by_pet(pet_name: str) List~Task~
+    }
+
+    class ScheduledTask {
+      + task: Task
+      + time_slot: str
+      + reasoning: str
+      + get_task() Task
+      + get_time_slot() str
+      + get_reasoning() str
+    }
+
+    class DailyPlan {
+      + scheduled_tasks: List~ScheduledTask~
+      + total_time_used: float
+      + description: str
+      + get_schedule() List~ScheduledTask~
+      + add_scheduled_task(st: ScheduledTask) void
+      + calculate_total_time() float
+    }
+
+    class Scheduler {
+      + PRIORITY_WEIGHTS: dict
+      + generate_daily_plan(owner: Owner, pet: Pet, available_time: float) DailyPlan
+      + sort_by_time(scheduled_tasks: List~ScheduledTask~) List~ScheduledTask~
+      + detect_conflicts(scheduled_tasks: List~ScheduledTask~) List~str~
+    }
+
+    Owner "1" --> "*" Pet : owns
+    Pet "1" --> "*" Task : has
+    ScheduledTask --> Task : wraps
+    DailyPlan "1" --> "*" ScheduledTask : contains
+    Scheduler --> DailyPlan : creates
+    Scheduler --> Owner : reads
+    Scheduler --> Pet : reads
+    Task --> Priority : uses
+    Task --> TaskStatus : uses
+    Task --> Frequency : uses
+    Pet --> Species : uses
+  ```
+
 **b. Design changes**
 
 - Did your design change during implementation?
