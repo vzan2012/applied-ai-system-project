@@ -1,8 +1,7 @@
 import streamlit as st
 from pawpal_system import (
     Owner, Pet, Task, Scheduler,
-    Priority, Species, TaskStatus, Frequency,
-    DailyPlan, ScheduledTask
+    Priority, Species, Frequency,
 )
 
 st.set_page_config(page_title="PawPal+", page_icon="🐾", layout="centered")
@@ -43,6 +42,8 @@ def create_or_update_pet(name: str, species_str: str):
     else:
         st.session_state.pet.species = species
 
+
+initialize_session_state()
 
 # ── Header ────────────────────────────────────────────────────────────────────
 
@@ -112,18 +113,30 @@ if st.session_state.tasks:
     PRIORITY_ICON = {Priority.HIGH: "🔴", Priority.MEDIUM: "🟡", Priority.LOW: "🟢"}
     FREQ_ICON = {Frequency.ONCE: "1×", Frequency.DAILY: "Daily", Frequency.WEEKLY: "Weekly"}
 
-    task_data = [
-        {
-            "Task": t.task_name,
-            "Duration": f"{t.duration_minutes} min",
-            "Priority": f"{PRIORITY_ICON[t.priority]} {t.priority.value.upper()}",
-            "Repeat": FREQ_ICON[t.frequency],
-            "Status": t.status.value.capitalize(),
-        }
-        for t in st.session_state.tasks
-    ]
-    st.table(task_data)
+    # Header row
+    h1, h2, h3, h4, h5, h6 = st.columns([3, 2, 2, 2, 2, 1])
+    h1.markdown("**Task**")
+    h2.markdown("**Duration**")
+    h3.markdown("**Priority**")
+    h4.markdown("**Repeat**")
+    h5.markdown("**Status**")
+    h6.markdown("")
+    st.divider()
 
+    for i, task in enumerate(st.session_state.tasks):
+        c1, c2, c3, c4, c5, c6 = st.columns([3, 2, 2, 2, 2, 1])
+        c1.write(task.task_name)
+        c2.write(f"{task.duration_minutes} min")
+        c3.write(f"{PRIORITY_ICON[task.priority]} {task.priority.value.upper()}")
+        c4.write(FREQ_ICON[task.frequency])
+        c5.write(task.status.value.capitalize())
+        if c6.button("🗑️", key=f"del_{i}"):
+            st.session_state.pet.remove_task(task.task_name)
+            st.session_state.tasks.pop(i)
+            st.session_state.daily_plan = None
+            st.rerun()
+
+    st.divider()
     if st.button("🗑️ Clear All Tasks"):
         st.session_state.tasks = []
         st.session_state.pet.tasks = []
