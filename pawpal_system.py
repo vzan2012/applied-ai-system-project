@@ -291,8 +291,7 @@ class Scheduler:
         """Sort tasks by priority (HIGH → MEDIUM → LOW), then by duration"""
         return sorted(
             tasks,
-            key=lambda t: (
-                -self.PRIORITY_WEIGHTS[t.get_priority()], -t.get_duration())
+            key=lambda t: -self.PRIORITY_WEIGHTS[t.get_priority()]
         )
 
     def _check_time_constraints(

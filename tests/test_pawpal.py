@@ -215,6 +215,18 @@ class TestScheduler:
         assert isinstance(plan, DailyPlan)
         assert len(plan.get_schedule()) > 0
 
+    def test_equal_priority_preserves_insertion_order(self):
+        """Tasks with equal priority should be scheduled in insertion order."""
+        owner = Owner("Jordan", 8.0)
+        pet = Pet("Mochi", Species.DOG)
+        pet.add_task(Task("Morning walk", 20, Priority.HIGH))
+        pet.add_task(Task("Breakfast", 30, Priority.HIGH))
+        pet.add_task(Task("Evening walk", 30, Priority.HIGH))
+
+        plan = Scheduler().generate_daily_plan(owner, pet, 8.0)
+        names = [st.get_task().task_name for st in plan.get_schedule()]
+        assert names == ["Morning walk", "Breakfast", "Evening walk"]
+
     def test_scheduler_priority_sorting(self):
         """Verify scheduler sorts tasks by priority (HIGH first)"""
         owner = Owner("Sarah", 5.0)
