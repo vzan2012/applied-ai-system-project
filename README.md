@@ -12,6 +12,16 @@ Adds an AI layer - after generating a schedule, the app sends the full context t
 
 ---
 
+## Demo
+
+![Owner & Pet Info](assets/screenshots/image.png)
+![Task List](assets/screenshots/image-1.png)
+![Generate Schedule](assets/screenshots/image-2.png)
+![AI Care Insights](assets/screenshots/image-3.png)
+![Schedule History](assets/screenshots/image-4.png)
+
+---
+
 ## Architecture Overview
 
 ![System Diagram](assets/system-diagram.png)
