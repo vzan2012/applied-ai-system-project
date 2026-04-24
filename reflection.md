@@ -201,6 +201,8 @@ classDiagram
 
   **Decision**: These enhancements are identified but will be prioritized and added during implementation based on testing requirements.
 
+  **Change 3 (Final Project)**: Added AI agentic workflow with Gemini 2.0 Flash (primary) and Groq/Llama 3.3 (fallback), schedule history for multi-pet comparison, and fixed equal-priority task ordering to preserve insertion order instead of sorting by duration.
+
 ---
 
 ## 2. Scheduling Logic and Tradeoffs
@@ -231,7 +233,7 @@ classDiagram
 
 - How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
   For this project, I have used Claude AI for every phases. I used it to review my initial UML design and able to identify missed classes like the
-  _ScheduledTask_ and enums like _TaskStatus_, _Frequency_ and _Priority_. By adding the test cases, able to identify the behaviors and edge cases. Refactoring the code for the features - scheduling features, conflicts and sorting.
+  _ScheduledTask_ and enums like _TaskStatus_, _Frequency_ and _Priority_. By adding the test cases, able to identify the behaviors and edge cases. Refactoring the code for the features - scheduling features, conflicts and sorting. In the final project phase, I integrated Gemini 2.0 Flash with a Groq fallback for the AI advisor and added schedule history to compare plans across multiple pets.
 - What kinds of prompts or questions were most helpful?
   I used direct questions and generated responses was clear. For example, _What are the most important edge cases for a scheduler with sorting and recurring tasks ?_
 
@@ -249,14 +251,14 @@ classDiagram
 **a. What you tested**
 
 - What behaviors did you test?
-  I tested priority sorting, recurring task generation, conflict detection, time constraint enforcement, and empty pet handling.
+  I tested priority sorting, recurring task generation, conflict detection, time constraint enforcement, and empty pet handling. I also added a test to verify that equal-priority tasks maintain insertion order after fixing the secondary sort that was causing tasks to reorder by duration.
 - Why were these tests important?
   These are the important behaviors of the scheduler. A bug in any of the feature would produce a wrong schedule result without no Python error.
 
 **b. Confidence**
 
 - How confident are you that your scheduler works correctly?
-  5 out of 5. All 41 tests pass including edge cases.
+  5 out of 5. All 42 tests pass including edge cases.
 - What edge cases would you test next if you had more time?
   Tasks spanning past midnight, two pets sharing the same task name, and an owner with zero available hours.
 
