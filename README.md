@@ -19,6 +19,8 @@ Adds an AI layer - after generating a schedule, the app sends the full context t
 ![Generate Schedule](assets/screenshots/image-2.png)
 ![AI Care Insights](assets/screenshots/image-3.png)
 ![Schedule History](assets/screenshots/image-4.png)
+![Schedule History Expanded (Multi-Pet)](assets/screenshots/image-5.png)
+![Scheduled Tasks & AI Care Insights Detail](assets/screenshots/image-6.png)
 
 ---
 
@@ -38,9 +40,12 @@ Adds an AI layer - after generating a schedule, the app sends the full context t
 ```bash
 git clone <your-repo-url>
 cd applied-ai-system-project
+
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
+
 cp .env.sample .env         # Add API_KEY and GROQ_API_KEY
 streamlit run app.py
 ```
