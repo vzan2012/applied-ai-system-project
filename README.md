@@ -131,3 +131,23 @@ Flawed: The AI removed imports from `app.py` because the linter flagged them as 
 - **RAG:** Let the AI reference real pet care guides and vet articles instead of relying on general training knowledge - so advice is breed-specific and verifiable.
 - **Multi-pet scheduling:** One combined daily plan for all pets, so the owner can spot clashes like two pets needing a walk at the same time.
 - **Time-of-day preferences:** Let users tag tasks as Morning, Afternoon, or Evening so Dinner doesn't end up at 10 AM.
+
+---
+
+## Demo Walkthrough
+
+**Loom Video:** _(coming soon — link will be added after recording)_
+
+The walkthrough covers:
+
+- Adding tasks for two pets and generating schedules
+- AI insights from Groq (Llama 3.3) after Gemini fallback
+- Schedule history comparison across pets
+
+---
+
+## Portfolio
+
+**GitHub:** https://github.com/vzan2012/applied-ai-system-project
+
+Building PawPal+ taught me that integrating AI into a real product is very different from just calling an API. I had to think about what happens when the model fails, when the quota runs out, and when the output is confidently wrong. I caught a hallucination during testing that I would have missed if I wasn't checking the numbers myself. That experience changed how I think about AI - it's a useful tool, but it needs guardrails, logging, and a human who's actually paying attention. That's the kind of AI engineer I want to be.
