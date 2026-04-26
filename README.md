@@ -1,5 +1,9 @@
 # PawPal+ · Applied AI System Project
 
+**Live App:** [vzan2012-applied-ai-system-project-app-s6nkuq.streamlit.app](https://vzan2012-applied-ai-system-project-app-s6nkuq.streamlit.app/)
+
+---
+
 ## Original Project
 
 PawPal+ (Modules 1–3) is a Python pet care scheduling assistant. It generates daily plans for pet owners based on task priority, available time, and recurrence. Core classes: `Owner`, `Pet`, `Task`, `Scheduler`, `DailyPlan`.
@@ -141,7 +145,7 @@ Flawed: The AI removed imports from `app.py` because the linter flagged them as 
 
 ## Demo Walkthrough
 
-**Loom Video:** _(coming soon — link will be added after recording)_
+**Loom Video:** https://www.loom.com/share/279b8ee6b075456f9ed247bfe6aa682d
 
 The walkthrough covers:
 
