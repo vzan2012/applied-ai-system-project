@@ -145,7 +145,7 @@ Flawed: The AI removed imports from `app.py` because the linter flagged them as 
 
 ## Demo Walkthrough
 
-**Loom Video:** https://www.loom.com/share/279b8ee6b075456f9ed247bfe6aa682d
+**Loom Video:** [Watch on Loom](https://www.loom.com/share/279b8ee6b075456f9ed247bfe6aa682d)
 
 The walkthrough covers:
 
